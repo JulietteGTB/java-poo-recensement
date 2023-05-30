@@ -12,12 +12,11 @@ import fr.diginamic.recensement.services.RechercheRegionsPlusPeuplees;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesDepartement;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesFrance;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesRegion;
+import fr.diginamic.recensement.services.exceptions.UserException;
 import fr.diginamic.recensement.utils.RecensementUtils;
 
 /**
  * Application de traitement des données de recensement de population
- * 
- * @param args
  */
 public class Application {
 
@@ -66,7 +65,11 @@ public class Application {
 				break;
 			case 4:
 				RecherchePopulationBorneService recherchePopBorne = new RecherchePopulationBorneService();
-				recherchePopBorne.traiter(recensement, scanner);
+				try {
+					recherchePopBorne.traiter(recensement, scanner);
+				}catch (UserException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 5:
 				RechercheVillesPlusPeupleesDepartement rechercheVillesPlusPeupleesDepartement = new RechercheVillesPlusPeupleesDepartement();
